@@ -5,37 +5,25 @@
       "alignment": "left",
       "segments": [
         {
-          "background": "#21c7a8",
-          "foreground": "#011627",
-          "leading_diamond": "\u256d\u2500\ue0b6",
-          "properties": {
-            "windows": "\ue62a"
-          },
+          "background": "#0E050F",
+          "foreground": "#EFDCF9",
           "style": "diamond",
-          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}}  ",
-          "trailing_diamond": "\ue0b0",
-          "type": "os"
+          "template": " {{ .UserName }}",
+          "type": "session"
         },
         {
-          "background": "#ef5350",
-          "foreground": "#ffeb95",
-          "powerline_symbol": "\ue0b0",
-          "style": "powerline",
-          "template": " \uf292 ",
-          "type": "root"
-        },
-        {
-          "background": "#82AAFF",
-          "foreground": "#011627",
-          "powerline_symbol": "\ue0b0",
+          "background": "#170B3B",
+          "foreground": "#EFDCF9",
+          "powerline_symbol": "\ue0b4",
           "properties": {
-            "folder_icon": "\uf07c ",
-            "folder_separator_icon": "<#011627>\ue0b1</> ",
-            "home_icon": " \ueb06 ",
-            "style": "agnoster"
+            "folder_icon": "...",
+            "folder_separator_icon": "/",
+            "home_icon": "~",
+            "max_depth": 3,
+            "style": "agnoster_short"
           },
           "style": "powerline",
-          "template": "{{ path .Path .Location }}",
+          "template": " {{ .Path }} ",
           "type": "path"
         },
         {
@@ -97,9 +85,13 @@
         {
           "background": "#f36943",
           "background_templates": [
-            "{{if eq \"Charging\" .State.String}}#b8e994{{end}}",
-            "{{if eq \"Discharging\" .State.String}}#fff34e{{end}}",
-            "{{if eq \"Full\" .State.String}}#33DD2D{{end}}"
+            "{{if lt .Percentage 15}}#e10615{{end}}",  
+            "{{if and (gt .Percentage 15) (lt .Percentage 40)}}#ea5e12{{end}}",  
+            "{{if and (gt .Percentage 40) (lt .Percentage 60)}}#f6a60b{{end}}",  
+            "{{if and (gt .Percentage 60) (lt .Percentage 80)}}#fbdb15{{end}}",  
+            "{{if and (gt .Percentage 80) (lt .Percentage 100)}}#93bf1e{{end}}", 
+            "{{if gt .Percentage 100}}#24a434{{end}}", 
+            "{{if eq \"Charging\" .State.String}}#008fd5{{end}}" 
           ],
           "foreground": "#46434c",
           "invert_powerline": true,
@@ -129,12 +121,6 @@
       "alignment": "left",
       "newline": true,
       "segments": [
-        {
-          "foreground": "#21c7a8",
-          "style": "plain",
-          "template": "\u2570\u2500",
-          "type": "text"
-        },
         {
           "background": "#1DB954",
           "foreground": "#011627",
@@ -172,7 +158,7 @@
         {
           "foreground": "#007ACC",
           "style": "plain",
-          "template": "\u279c ",
+          "template": "📎 ",
           "type": "text"
         }
       ],
